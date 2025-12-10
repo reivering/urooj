@@ -36,7 +36,7 @@
         
         html { 
             scroll-behavior: smooth; 
-            overflow-x: hidden; /* Prevent horizontal scroll on body */
+            overflow-x: hidden; 
         }
 
         body {
@@ -58,13 +58,12 @@
             text-transform: uppercase;
         }
 
-        /* Responsive Clamping for Fonts */
         h1 { font-size: clamp(2.2rem, 5vw, 4rem); }
         h2 { font-size: clamp(1.5rem, 4vw, 3rem); }
         
         .huge-text {
             font-family: 'Nunito', sans-serif;
-            font-size: clamp(3.5rem, 12vw, 8rem); /* Adjusted for mobile */
+            font-size: clamp(3.5rem, 12vw, 8rem);
             font-weight: 900;
             color: var(--pink);
             -webkit-text-stroke: 3px var(--maroon);
@@ -88,7 +87,7 @@
             box-shadow: 4px 4px 0px var(--maroon);
             background: var(--pink);
             color: var(--maroon);
-            white-space: nowrap; /* Prevent button text wrapping awkwardly */
+            white-space: nowrap;
         }
 
         .btn:hover {
@@ -101,7 +100,7 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px; /* Reduced side padding for mobile */
+            padding: 0 20px;
             width: 100%;
         }
 
@@ -110,7 +109,24 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding-top: 80px; /* Account for fixed nav */
+            padding-top: 80px;
+            padding-bottom: 40px;
+        }
+
+        /* Vertical Layout for Hero */
+        .hero-vertical-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-text-centered {
+            text-align: center;
+            align-items: center;
+            width: 100%;
+            max-width: 800px;
         }
 
         .bento-grid {
@@ -133,24 +149,52 @@
             box-shadow: var(--hard-shadow);
         }
         
-        /* Grid Spans */
         .span-12 { grid-column: span 12; }
         .span-8 { grid-column: span 8; }
         .span-6 { grid-column: span 6; }
         .span-4 { grid-column: span 4; }
         .span-3 { grid-column: span 3; }
 
-        /* --- COMPARISON TABLE --- */
+        /* --- UPDATED: MOCKUP IMAGE CONTAINER --- */
+        .mockup-container {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            width: 100%;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap; /* Allows wrapping on small screens */
+        }
+
+        /* Styles for the actual image files */
+        .ui-mockup-img {
+            width: 300px; /* Base width for desktop */
+            max-width: 100%; /* Responsive limit */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 24px; /* Matches your screenshot curves */
+            border: 3px solid var(--maroon);
+            box-shadow: 6px 6px 0px rgba(94, 13, 8, 0.2);
+            transition: transform 0.2s ease;
+            object-fit: contain; /* Prevents cropping */
+            background: #FFF; /* White bg behind transparent pngs */
+        }
+        
+        .ui-mockup-img:hover {
+             transform: translateY(-5px);
+             box-shadow: 8px 8px 0px rgba(94, 13, 8, 0.3);
+        }
+
+        /* --- TABLE --- */
         .table-wrapper {
             width: 100%;
-            overflow-x: auto; /* Allow scrolling on mobile */
+            overflow-x: auto;
             -webkit-overflow-scrolling: touch;
             padding-bottom: 10px;
         }
 
         .comparison-table {
             width: 100%;
-            min-width: 600px; /* Force scroll on small screens */
+            min-width: 600px;
             border-collapse: collapse;
             margin-top: 20px;
         }
@@ -173,42 +217,6 @@
         }
         .check { color: #2ecc71; -webkit-text-stroke: 1px var(--maroon); font-size: 1.5rem; }
         .cross { color: #e74c3c; -webkit-text-stroke: 1px var(--maroon); font-size: 1.5rem; }
-
-        /* --- UI ELEMENTS --- */
-        .ui-receipt {
-            background: var(--white);
-            padding: 15px;
-            border-radius: 12px;
-            border: 2px dashed var(--maroon);
-            margin-top: auto;
-            font-size: 0.8rem;
-            transform: rotate(-2deg);
-            color: var(--maroon);
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-        }
-        
-        .ui-chat-bubble {
-            background: var(--maroon);
-            color: var(--pink);
-            padding: 12px 20px;
-            border-radius: 25px 25px 25px 0;
-            margin-bottom: 10px;
-            width: fit-content;
-            font-size: 0.9rem;
-            font-weight: 700;
-            border: 2px solid var(--maroon);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .ui-chat-bubble.reply {
-            background: var(--pink);
-            color: var(--maroon);
-            margin-left: auto;
-            border-radius: 25px 25px 0 25px;
-        }
 
         /* --- MARQUEE --- */
         .marquee-container {
@@ -269,38 +277,24 @@
             -webkit-text-stroke: 2px var(--maroon);
         }
 
-        /* --- MOBILE RESPONSIVE TWEAKS --- */
+        /* --- RESPONSIVE FIX --- */
         @media (max-width: 968px) {
-            /* Collapse Grid to Single Column */
-            .bento-grid { 
-                display: flex; 
-                flex-direction: column; 
-                gap: 20px;
-            }
-            
-            /* Reset widths */
+            .bento-grid { display: flex; flex-direction: column; gap: 20px; }
             .span-8, .span-6, .span-4, .span-3 { width: 100%; }
-            
-            /* Hero Adjustments */
-            .hero-wrapper { 
-                min-height: auto; 
-                padding: 100px 0 40px 0; 
-                display: block;
-            }
-            
-            /* Typography Tweaks */
-            .huge-text { 
-                font-size: 4rem; 
-                text-align: center;
-            }
+            .hero-wrapper { min-height: auto; padding: 100px 0 40px 0; display: block; }
+            .huge-text { font-size: 4rem; text-align: center; }
             h1 { text-align: center; }
-            .hero-text-wrapper { text-align: center; display: flex; flex-direction: column; align-items: center; }
-            
-            /* Reduce Padding on boxes for more space */
             .bento-box { padding: 24px; }
             
-            /* Ensure images/icons scale nicely */
-            .bento-box i.fa-sun { font-size: 6rem; }
+            /* Mobile Image Handling */
+            .mockup-container { 
+                flex-direction: column; 
+                align-items: center;
+            }
+            .ui-mockup-img { 
+                width: 90%; /* Take up most of screen width */
+                max-width: 350px;
+            }
         }
     </style>
 </head>
@@ -309,14 +303,15 @@
     <nav style="padding: 15px 0; position: fixed; top: 0; left: 0; width: 100%; z-index: 100; background: rgba(161, 105, 50, 0.95); backdrop-filter: blur(5px); border-bottom: 2px solid var(--maroon);">
         <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
             <div class="nav-logo" style="font-size: 1.5rem;">L<i class="fas fa-infinity" style="color: var(--maroon); -webkit-text-stroke: 0;"></i>P</div>
-            <a href="#contact" class="btn" style="padding: 10px 20px; font-size: 0.8rem;">Connect with Me</a>
+            <a href="#contact" class="btn" style="padding: 10px 20px; font-size: 0.8rem;">Join the Family</a>
         </div>
     </nav>
 
     <div class="hero-wrapper">
         <section class="container">
-            <div class="bento-grid">
-                <div class="bento-box span-8 hero-text-wrapper" style="justify-content: center; min-height: 400px;">
+            <div class="hero-vertical-layout">
+                
+                <div class="bento-box hero-text-centered">
                     <span class="huge-text">LOOP</span>
                     <h1 class="reveal">The Youth Economy <br><span style="color: var(--white); -webkit-text-stroke: 2px var(--maroon);">Blooms Here.</span></h1>
                     
@@ -329,24 +324,16 @@
                     </div>
                 </div>
 
-                <div class="bento-box span-4" style="background: var(--white); justify-content: center; align-items: center; min-height: 400px;">
-                    <i class="fas fa-sun" style="font-size: 8rem; color: var(--pink); position: absolute; top: -20px; right: -20px; opacity: 0.3;"></i>
+                <div class="mockup-container">
                     
-                    <div style="width: 100%; position: relative; z-index: 2;">
-                        <div class="ui-chat-bubble">Selling Psych 101? <i class="fas fa-book"></i></div>
-                        <div class="ui-chat-bubble reply">Yeah, for RM 45! <i class="fas fa-thumbs-up"></i></div>
-                        
-                        <div class="ui-receipt" style="margin-top: 30px;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                                <span>USED TEXTBOOK</span>
-                                <span>RM 45.00</span>
-                            </div>
-                            <div style="font-size: 0.7rem; opacity: 0.8; border-top: 1px dashed var(--maroon); padding-top: 5px;">
-                                PAID VIA LOOP • SECURE
-                            </div>
-                        </div>
-                    </div>
+                    <img src="assets/marketplace.jpg" alt="Marketplace UI" class="ui-mockup-img" onerror="this.src='https://via.placeholder.com/300x300/FFFBF0/5e0d08?text=Marketplace+Img'">
+                    
+                    <img src="assets/social-events-ui.jpg" alt="Social UI" class="ui-mockup-img" onerror="this.src='https://via.placeholder.com/300x450/FFFBF0/5e0d08?text=Social+Img'">
+
+                    <img src="assets/payment-request-ui.jpg" alt="Payment UI" class="ui-mockup-img" onerror="this.src='https://via.placeholder.com/300x300/FFFBF0/5e0d08?text=Payment+Img'">
+                    
                 </div>
+
             </div>
         </section>
     </div>
@@ -481,8 +468,7 @@
     <footer style="background: var(--maroon); padding: 60px 0; margin-top: 60px;" id="contact">
         <div class="container" style="text-align: center;">
             <div class="nav-logo" style="justify-content: center; color: var(--pink); margin-bottom: 30px;">L<i class="fas fa-infinity" style="color: var(--white);"></i>P</div>
-            <h2 style="color: var(--white); margin-bottom: 30px;">Connect with Me.</h2>
-            <p style="color: var(--pink); margin-bottom: 30px; font-weight: 600;">Want to collaborate, mentor, or<br>support the Campus OS?<br>Connect with me.</p>
+            <h2 style="color: var(--white); margin-bottom: 30px;">Join the Family.</h2>
             <div style="display: flex; gap: 30px; justify-content: center; flex-wrap: wrap;">
                 <a href="https://linkedin.com/in/urooj-sohawon-24a4a1220" target="_blank" style="color: var(--pink); text-decoration: none; font-weight: 800; font-size: 1.1rem; text-transform: uppercase;">
                     <i class="fab fa-linkedin"></i> LinkedIn

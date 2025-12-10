@@ -69,12 +69,12 @@
             -webkit-text-stroke: 3px var(--maroon);
             display: block;
             line-height: 0.8;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         
         /* --- BUTTONS --- */
         .btn {
-            padding: 14px 28px;
+            padding: 16px 32px;
             border-radius: 50px;
             font-weight: 800;
             cursor: pointer;
@@ -104,29 +104,21 @@
             width: 100%;
         }
 
+        /* HERO WRAPPER: Full Screen Text Only */
         .hero-wrapper {
-            min-height: 100vh;
+            min-height: 100vh; /* Force full screen height */
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding-top: 80px;
-            padding-bottom: 40px;
-        }
-
-        /* Vertical Layout for Hero */
-        .hero-vertical-layout {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
             align-items: center;
-            width: 100%;
+            padding-top: 60px; 
         }
 
         .hero-text-centered {
             text-align: center;
             align-items: center;
             width: 100%;
-            max-width: 800px;
+            max-width: 900px;
         }
 
         .bento-grid {
@@ -155,33 +147,35 @@
         .span-4 { grid-column: span 4; }
         .span-3 { grid-column: span 3; }
 
-        /* --- UPDATED: MOCKUP IMAGE CONTAINER --- */
+        /* --- SHOWCASE SECTION (For Images) --- */
+        .showcase-section {
+            padding: 40px 0 80px 0; /* Space above and below images */
+        }
+
         .mockup-container {
             display: flex;
             flex-direction: row;
-            gap: 20px;
+            gap: 60px; 
             width: 100%;
             justify-content: center;
-            align-items: flex-start;
-            flex-wrap: wrap; /* Allows wrapping on small screens */
+            align-items: flex-end; 
+            flex-wrap: wrap;
         }
 
-        /* Styles for the actual image files */
         .ui-mockup-img {
-            width: 300px; /* Base width for desktop */
-            max-width: 100%; /* Responsive limit */
-            height: auto; /* Maintain aspect ratio */
-            border-radius: 24px; /* Matches your screenshot curves */
+            width: 280px;
+            height: auto;
+            border-radius: 20px;
             border: 3px solid var(--maroon);
             box-shadow: 6px 6px 0px rgba(94, 13, 8, 0.2);
             transition: transform 0.2s ease;
-            object-fit: contain; /* Prevents cropping */
-            background: #FFF; /* White bg behind transparent pngs */
+            object-fit: contain;
         }
         
         .ui-mockup-img:hover {
-             transform: translateY(-5px);
-             box-shadow: 8px 8px 0px rgba(94, 13, 8, 0.3);
+             transform: translateY(-8px);
+             box-shadow: 10px 10px 0px rgba(94, 13, 8, 0.3);
+             z-index: 10;
         }
 
         /* --- TABLE --- */
@@ -225,9 +219,10 @@
             padding: 15px 0;
             overflow: hidden;
             transform: rotate(-1deg);
-            margin: 40px -20px;
+            margin: 0px -20px 60px -20px; /* Space below banner before images */
             border-top: 4px solid var(--pink);
             border-bottom: 4px solid var(--pink);
+            scroll-margin-top: 100px; /* Offset for sticky nav */
         }
         
         .marquee-content {
@@ -279,20 +274,27 @@
 
         /* --- RESPONSIVE FIX --- */
         @media (max-width: 968px) {
-            .bento-grid { display: flex; flex-direction: column; gap: 20px; }
+            .bento-grid { display: flex; flex-direction: column; gap: 30px; }
             .span-8, .span-6, .span-4, .span-3 { width: 100%; }
-            .hero-wrapper { min-height: auto; padding: 100px 0 40px 0; display: block; }
+            
+            /* HERO */
+            .hero-wrapper { 
+                min-height: 100vh; /* Keep full screen on mobile */
+                padding: 0 20px; 
+            }
+            
             .huge-text { font-size: 4rem; text-align: center; }
             h1 { text-align: center; }
             .bento-box { padding: 24px; }
             
-            /* Mobile Image Handling */
+            /* Mobile Stack */
             .mockup-container { 
-                flex-direction: column; 
+                flex-direction: column;
                 align-items: center;
+                gap: 40px;
             }
             .ui-mockup-img { 
-                width: 90%; /* Take up most of screen width */
+                width: 90%;
                 max-width: 350px;
             }
         }
@@ -300,45 +302,29 @@
 </head>
 <body>
 
-    <nav style="padding: 15px 0; position: fixed; top: 0; left: 0; width: 100%; z-index: 100; background: rgba(161, 105, 50, 0.95); backdrop-filter: blur(5px); border-bottom: 2px solid var(--maroon);">
+    <nav style="padding: 20px 0; position: fixed; top: 0; left: 0; width: 100%; z-index: 100; background: rgba(161, 105, 50, 0.95); backdrop-filter: blur(5px); border-bottom: 2px solid var(--maroon);">
         <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
             <div class="nav-logo" style="font-size: 1.5rem;">L<i class="fas fa-infinity" style="color: var(--maroon); -webkit-text-stroke: 0;"></i>P</div>
-            <a href="#contact" class="btn" style="padding: 10px 20px; font-size: 0.8rem;">Join the Family</a>
+            <a href="#contact" class="btn" style="padding: 10px 24px; font-size: 0.8rem;">Connect with me</a>
         </div>
     </nav>
 
     <div class="hero-wrapper">
-        <section class="container">
-            <div class="hero-vertical-layout">
-                
-                <div class="bento-box hero-text-centered">
-                    <span class="huge-text">LOOP</span>
-                    <h1 class="reveal">The Youth Economy <br><span style="color: var(--white); -webkit-text-stroke: 2px var(--maroon);">Blooms Here.</span></h1>
-                    
-                    <p style="font-size: 1.1rem; margin-top: 20px; max-width: 500px; color: var(--maroon); font-weight: 700;">
-                        Loop is the sanctuary for student life. Plan gatherings, split costs, and <span style="background: var(--pink); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--maroon);">buy & sell gear</span> in a space designed for trust.
-                    </p>
-                    
-                    <div style="margin-top: 30px;">
-                        <a href="#compare" class="btn" style="padding: 16px 32px; font-size: 1rem;">Start Your Journey</a>
-                    </div>
-                </div>
-
-                <div class="mockup-container">
-                    
-                    <img src="assets/marketplace.jpg" alt="Marketplace UI" class="ui-mockup-img" onerror="this.src='https://via.placeholder.com/300x300/FFFBF0/5e0d08?text=Marketplace+Img'">
-                    
-                    <img src="assets/social-events-ui.jpg" alt="Social UI" class="ui-mockup-img" onerror="this.src='https://via.placeholder.com/300x450/FFFBF0/5e0d08?text=Social+Img'">
-
-                    <img src="assets/payment-request-ui.jpg" alt="Payment UI" class="ui-mockup-img" onerror="this.src='https://via.placeholder.com/300x300/FFFBF0/5e0d08?text=Payment+Img'">
-                    
-                </div>
-
+        <div class="bento-box hero-text-centered">
+            <span class="huge-text">LOOP</span>
+            <h1 class="reveal">The Youth Economy <br><span style="color: var(--white); -webkit-text-stroke: 2px var(--maroon);">Blooms Here.</span></h1>
+            
+            <p style="font-size: 1.1rem; margin-top: 24px; max-width: 500px; color: var(--maroon); font-weight: 700; line-height: 1.6;">
+                Loop is the sanctuary for student life. Plan gatherings, split costs, and <span style="background: var(--pink); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--maroon);">buy & sell gear</span> in a space designed for trust.
+            </p>
+            
+            <div style="margin-top: 40px;">
+                <a href="#banner" class="btn" style="padding: 16px 32px; font-size: 1rem;">Start Your Journey</a>
             </div>
-        </section>
+        </div>
     </div>
 
-    <div class="marquee-container" id="compare">
+    <div class="marquee-container" id="banner">
         <div class="marquee-content">
             <span><i class="fas fa-store"></i> Student Marketplace</span>
             <span><i class="fas fa-check-circle"></i> Verified Users</span>
@@ -348,10 +334,18 @@
         </div>
     </div>
 
+    <section class="container showcase-section">
+         <div class="mockup-container">
+            <img src="assets/marketplace.jpg" alt="Marketplace" class="ui-mockup-img">
+            <img src="assets/social-events-ui.jpg" alt="Social" class="ui-mockup-img">
+            <img src="assets/payment-request-ui.jpg" alt="Payment" class="ui-mockup-img">
+        </div>
+    </section>
+
     <section class="container">
         <div class="bento-grid">
             <div class="bento-box span-12" style="background: var(--maroon); color: var(--pink); text-align: center;">
-                <h2 style="color: var(--pink); margin-bottom: 5px;">What Makes Us Different?</h2>
+                <h2 style="color: var(--pink); margin-bottom: 10px;">What Makes Us Different?</h2>
                 
                 <div class="table-wrapper">
                     <table class="comparison-table">
@@ -394,7 +388,7 @@
                     </table>
                 </div>
 
-                <div style="margin-top: 15px; border: 2px solid var(--pink); border-radius: 50px; display: inline-block; padding: 8px 20px; color: var(--white); font-size: 0.9rem; font-weight: 600;">
+                <div style="margin-top: 20px; border: 2px solid var(--pink); border-radius: 50px; display: inline-block; padding: 10px 24px; color: var(--white); font-size: 0.9rem; font-weight: 600;">
                     Loop wins by merging social trust with campus density.
                 </div>
             </div>
@@ -403,7 +397,7 @@
 
     <section class="container">
         <div class="bento-grid">
-            <div class="bento-box span-12" style="background: var(--card-orange); text-align: center; padding-bottom: 10px;">
+            <div class="bento-box span-12" style="background: var(--card-orange); text-align: center; padding-bottom: 20px;">
                 <h2>Roadmap: What's Next?</h2>
             </div>
             
@@ -443,7 +437,7 @@
         </div>
     </section>
 
-    <section class="container" style="margin-bottom: 60px;">
+    <section class="container" style="margin-bottom: 80px; margin-top: 40px;">
         <div class="bento-grid">
             <div class="bento-box span-8" style="background: var(--white); justify-content: center; border-color: var(--maroon);">
                  <h2 style="font-size: 2rem; color: var(--maroon);">
@@ -465,11 +459,13 @@
         </div>
     </section>
 
-    <footer style="background: var(--maroon); padding: 60px 0; margin-top: 60px;" id="contact">
+    <footer style="background: var(--maroon); padding: 80px 0; margin-top: 80px;" id="contact">
         <div class="container" style="text-align: center;">
             <div class="nav-logo" style="justify-content: center; color: var(--pink); margin-bottom: 30px;">L<i class="fas fa-infinity" style="color: var(--white);"></i>P</div>
-            <h2 style="color: var(--white); margin-bottom: 30px;">Join the Family.</h2>
-            <div style="display: flex; gap: 30px; justify-content: center; flex-wrap: wrap;">
+            
+            <h2 style="color: var(--white); margin-bottom: 40px; font-size: 1.8rem; line-height: 1.3;">WANT TO COLLABORATE, MENTOR, OR SUPPORT THE CAMPUS OS?<br>CONNECT WITH ME.</h2>
+            
+            <div style="display: flex; gap: 40px; justify-content: center; flex-wrap: wrap;">
                 <a href="https://linkedin.com/in/urooj-sohawon-24a4a1220" target="_blank" style="color: var(--pink); text-decoration: none; font-weight: 800; font-size: 1.1rem; text-transform: uppercase;">
                     <i class="fab fa-linkedin"></i> LinkedIn
                 </a>
@@ -480,7 +476,7 @@
                     <i class="fas fa-envelope"></i> Email
                 </a>
             </div>
-            <p style="margin-top: 60px; font-size: 0.8rem; opacity: 0.6; color: var(--white);">© 2025 Loop Student Network.</p>
+            <p style="margin-top: 80px; font-size: 0.8rem; opacity: 0.6; color: var(--white);">© 2025 Loop Student Network.</p>
         </div>
     </footer>
 

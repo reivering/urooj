@@ -39,6 +39,12 @@
             overflow-x: hidden; 
         }
 
+        /* Hide scrollbar during load */
+        body.loading {
+            overflow: hidden;
+            height: 100vh;
+        }
+
         body {
             background-color: var(--bg-brown);
             color: var(--maroon);
@@ -46,6 +52,66 @@
             overflow-x: hidden;
             background-image: radial-gradient(var(--maroon) 0.8px, transparent 0.8px);
             background-size: 24px 24px;
+        }
+
+        /* --- LOADING SCREEN STYLES --- */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--maroon);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .loader-content {
+            text-align: center;
+            position: relative;
+        }
+
+        .loader-logo {
+            font-family: var(--font-head);
+            font-size: clamp(4rem, 10vw, 8rem);
+            font-weight: 900;
+            color: var(--pink);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            /* White stroke for contrast against maroon */
+            -webkit-text-stroke: 3px var(--white); 
+            opacity: 0; /* Starts hidden for animation */
+        }
+
+        .loader-logo i {
+            color: var(--white);
+            -webkit-text-stroke: 0; /* Remove stroke from icon to keep it clean */
+            font-size: 0.9em; /* Slight visual adjustment */
+        }
+
+        .loader-bar-container {
+            width: 200px;
+            height: 6px;
+            background: rgba(230, 163, 196, 0.2);
+            border-radius: 10px;
+            margin-top: 20px;
+            overflow: hidden;
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .loader-bar {
+            width: 0%;
+            height: 100%;
+            background-color: var(--pink);
+            position: absolute;
+            left: 0;
+            top: 0;
         }
 
         /* --- TYPOGRAPHY --- */
@@ -300,7 +366,18 @@
         }
     </style>
 </head>
-<body>
+<body class="loading">
+
+    <div id="loader">
+        <div class="loader-content">
+            <div class="loader-logo">
+                L<i class="fas fa-infinity"></i>P
+            </div>
+            <div class="loader-bar-container">
+                <div class="loader-bar"></div>
+            </div>
+        </div>
+    </div>
 
     <nav style="padding: 20px 0; position: fixed; top: 0; left: 0; width: 100%; z-index: 100; background: rgba(161, 105, 50, 0.95); backdrop-filter: blur(5px); border-bottom: 2px solid var(--maroon);">
         <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
@@ -472,23 +549,73 @@
                 <a href="https://wa.me/60106632934" target="_blank" style="color: var(--pink); text-decoration: none; font-weight: 800; font-size: 1.1rem; text-transform: uppercase;">
                     <i class="fab fa-whatsapp"></i> WhatsApp
                 </a>
-                <a href="mailto:uroojsohawon@gmail.com" style="color: var(--pink); text-decoration: none; font-weight: 800; font-size: 1.1rem; text-transform: uppercase;">
+                <a href="uroojsohawon@gmail.com" style="color: var(--pink); text-decoration: none; font-weight: 800; font-size: 1.1rem; text-transform: uppercase;">
                     <i class="fas fa-envelope"></i> Email
                 </a>
             </div>
-            <p style="margin-top: 80px; font-size: 0.8rem; opacity: 0.6; color: var(--white);">© 2025 Loop Student Network.</p>
+                <p style="color: white;">&copy; 2025 LOOP All rights reserved.</p>
+        <p style="margin-top: 10px; font-size: 0.7rem; opacity: 0.8; color: white;">
+            Built by <a href="https://zeyno.my" target="_blank" style="color: orange; text-decoration: none; font-weight: 600;">zeyno.my</a>
+        </p>
         </div>
     </footer>
 
     <script>
         gsap.registerPlugin(ScrollTrigger);
+
+        // --- LOADING SCREEN ANIMATION ---
+        // 1. Animate Logo Entrance
+        const loaderTimeline = gsap.timeline();
+
+        loaderTimeline.fromTo(".loader-logo", 
+            { y: 50, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.8, ease: "back.out(1.7)" }
+        )
+        .to(".loader-bar", {
+            width: "100%",
+            duration: 1.5,
+            ease: "power2.inOut"
+        });
+
+        // 2. Wait for page load, then exit
+        window.addEventListener('load', () => {
+            // Ensure the bar fills up first if load is instant
+            gsap.delayedCall(1.8, () => {
+                const exitTimeline = gsap.timeline();
+
+                // Logo moves up slightly and fades
+                exitTimeline.to(".loader-content", {
+                    y: -50,
+                    opacity: 0,
+                    duration: 0.5
+                })
+                // The maroon curtain slides UP
+                .to("#loader", {
+                    yPercent: -100,
+                    duration: 1,
+                    ease: "power4.inOut"
+                })
+                // Allow scrolling again
+                .add(() => {
+                    document.body.classList.remove('loading');
+                }, "-=0.8") // Happens during the slide
+                // Trigger hero text reveal
+                .from(".reveal", { 
+                    y: 50, 
+                    opacity: 0, 
+                    duration: 1, 
+                    ease: "power3.out" 
+                }, "-=0.5");
+            });
+        });
+
+        // --- SCROLL ANIMATIONS (Existing) ---
         gsap.utils.toArray('.bento-box').forEach(box => {
             gsap.fromTo(box, 
                 { opacity: 0, y: 30 },
                 { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", scrollTrigger: { trigger: box, start: "top 95%" } }
             );
         });
-        gsap.from(".reveal", { opacity: 0, y: 20, duration: 0.8, delay: 0.1 });
     </script>
 </body>
 </html>
